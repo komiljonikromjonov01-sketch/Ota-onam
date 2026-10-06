@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dada. Ayam.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d0a08;--tx:#efe5d3;--dim:#b7ab97;--gold:#b99a68;
+--serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;--sans:"Jost",system-ui,-apple-system,sans-serif}
+@media(prefers-color-scheme:light){:root{--bg:#0d0a08}}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{background:var(--bg);color:var(--tx);font-family:var(--serif);font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body.lock{overflow:hidden;height:100svh}
+.glow{position:fixed;inset:-20%;z-index:0;pointer-events:none;
+background:radial-gradient(40% 35% at 50% 40%,rgba(185,154,104,.13),transparent 70%);transform:translateY(var(--py,0px))}
+main{position:relative;z-index:1}
+section{min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+padding:calc(14vh + env(safe-area-inset-top,0px)) 8vw calc(14vh + env(safe-area-inset-bottom,0px))}
+.wrap{max-width:34rem}
+h2{font-weight:300;font-size:clamp(2.2rem,8vw,4.2rem);line-height:1.12;letter-spacing:-.01em;margin-bottom:3.5rem}
+p{font-size:clamp(1.2rem,4.4vw,1.55rem);line-height:1.7;color:var(--tx);margin-bottom:1.5rem}
+p.soft{color:var(--dim)}
+p.name{font-size:clamp(1.8rem,6vw,2.6rem);margin:3rem 0 .5rem;color:var(--gold);font-style:italic}
+.sign{font-style:italic;color:var(--gold);margin-top:2.5rem;font-size:clamp(1.5rem,5vw,2rem)}
+.r{opacity:0;transform:translateY(14px);transition:opacity 2.4s ease,transform 2.8s ease}
+.r.on{opacity:1;transform:none}
+/* intro */
+#intro{position:fixed;inset:0;z-index:5;background:var(--bg);transition:opacity 2s ease;padding-bottom:0}
+#intro.gone{opacity:0;pointer-events:none}
+#intro h1{font-weight:300;font-size:clamp(3rem,13vw,6.5rem);letter-spacing:.01em}
+#intro .sub{font-family:var(--sans);font-weight:300;font-size:clamp(.95rem,3.6vw,1.1rem);color:var(--dim);margin-top:2rem;line-height:1.7;max-width:22rem}
+.btn{margin-top:3.5rem;background:none;border:1px solid var(--gold);color:var(--gold);font-family:var(--sans);font-weight:300;
+font-size:1rem;letter-spacing:.12em;padding:1rem 2.6rem;border-radius:999px;cursor:pointer;transition:background .8s,color .8s}
+.btn:hover,.btn:focus-visible{background:var(--gold);color:var(--bg);outline:none}
+#story{display:none}
+body.go #story{display:block}
+.line{width:1px;height:4rem;background:linear-gradient(var(--gold),transparent);margin:0 auto 3rem}
+/* photo */
+.photo{width:min(100%,24rem);aspect-ratio:4/3;margin:2.5rem auto 0;border:1px dashed rgba(185,154,104,.45);border-radius:4px;
+display:flex;align-items:center;justify-content:center;color:var(--dim);font-family:var(--sans);font-size:.85rem;overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.dark{background:linear-gradient(transparent,#050403 30%,#050403 70%,transparent)}
+#final .big{font-size:clamp(2rem,7.5vw,3.4rem);line-height:1.25;margin-bottom:3rem}
+#mute{position:fixed;right:max(1rem,env(safe-area-inset-right,0px));top:max(1rem,env(safe-area-inset-top,0px));z-index:9;display:none;background:none;border:0;
+color:var(--dim);font-family:var(--sans);font-size:.8rem;padding:.6rem;cursor:pointer}
+body.go #mute.has{display:block}
+@media(prefers-reduced-motion:reduce){.r{transition-duration:.01s;transform:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body class="lock">
+<div class="glow"></div>
+<button id="mute" aria-label="Musiqa">musiqa: yoqilgan</button>
+<!-- Musiqa (ixtiyoriy): music.mp3 faylini index.html yoniga qo'ying. Bo'lmasa sayt jim ishlayveradi. -->
+<audio id="bg" src="music.mp3" loop preload="none"></audio>
+
+<section id="intro">
+  <h1 class="r" id="i1">Dada. Ayam.</h1>
+  <p class="sub r" id="i2">Bu saytni sizlarga aytishga qiynalgan gaplarim uchun tayyorladim.</p>
+  <button class="btn r" id="i3">Boshlaymiz</button>
+</section>
+
+<main id="story">
+
+<section><div class="wrap">
+  <h2 class="r">Men kichkinaligimda juda ko‘p kasal bo‘lganman.</h2>
+  <p class="r">Men o‘sha paytlarda buni to‘liq tushunmaganman.</p>
+  <p class="r">Lekin hozir o‘ylab qarasam, men kasal bo‘lgan kechalarda sizlar ham men bilan birga qiynalgan ekansizlar.</p>
+  <p class="r">Men uxlagan bo‘lsam ham, sizlar ko‘zingizni yumolmay, yonimda o‘tirgan kechalar bo‘lgan.</p>
+  <p class="r">Men uchun oddiy bo‘lgan bir tun, sizlar uchun xavotir bilan o‘tgan tun bo‘lgan.</p>
+</div></section>
+
+<section><div class="wrap">
+  <p class="name r">Dada…</p>
+  <p class="r">Men bilaman, siz ham o‘sha kechalarda uxlamagansiz.</p>
+  <p class="name r">Ayam…</p>
+  <p class="r">Siz esa mening sog‘ligimdan xavotir olib, ko‘p qiynalgansiz.</p>
+</div></section>
+
+<section><div class="wrap">
+  <h2 class="r">Ayam, Muhlisa…</h2>
+  <p class="r">Men bolaligimda ko‘p kasal bo‘lganim uchun mening sog‘lig‘imdan eng ko‘p xavotir olgan insonlardan biri siz edingiz.</p>
+  <p class="r">Men o‘sha paytda sizning xavotiringizni oddiy narsa deb qabul qilgan bo‘lishim mumkin.</p>
+  <p class="r">Lekin hozir tushunyapman.</p>
+  <p class="r">Farzandingizning sog‘lig‘i joyida bo‘lmasa, ona uchun bundan og‘irroq narsa bo‘lmas ekan.</p>
+  <p class="r">Meni deb qiynalgan kunlaringiz, xavotir olgan tunlaringiz uchun rahmat.</p>
+  <p class="r">Men buni sizga oldin hech qachon aytmaganman.</p>
+  <p class="r">Lekin men sizni chin dildan yaxshi ko‘raman.</p>
+</div></section>
+
+<section><div class="wrap">
+  <h2 class="r">Dadam, Kozimbek…</h2>
+  <p class="r">Men ulg‘ayganim sari bir narsani tushunyapman.</p>
+  <p class="r">Men bolaligimda sizning pul topishingizni, oilani boqishingizni, menga yaxshi sharoit yaratishingizni oddiy holat deb o‘ylagan ekanman.</p>
+  <p class="r">Go‘yoki dada ishlaydi, pul topadi, farzandiga hamma sharoitni qilib beradi — bu tabiiydek tuyulgan.</p>
+  <p class="r">Lekin hozir tushunyapman.</p>
+  <p class="r">Pul topish oson emas.</p>
+  <p class="r">Oila uchun mas’uliyat olish oson emas.</p>
+  <p class="r">Oilani hech narsaga kam qilmasdan boqish, farzandining kelajagi haqida o‘ylash, uning xohishlarini qo‘llab-quvvatlash — oddiy narsa emas.</p>
+  <p class="r">Buning ortida sizning yillaringiz, mehnatingiz va charchoqlaringiz bor.</p>
+</div></section>
+
+<section><div class="wrap">
+  <p class="r">Dada, men sizni qadrlayman.</p>
+  <p class="r">Men buni oldin sizga aytmaganman.</p>
+  <p class="r">Lekin bugun aytmoqchiman:</p>
+  <h2 class="r" style="margin-top:2rem">Rahmat, dada.</h2>
+</div></section>
+
+<section><div class="wrap">
+  <h2 class="r">Siz menga ishondingiz.</h2>
+  <p class="r">Men qimmat kontraktli o‘qishlarda o‘qisam ham, bu mening qarorim edi.</p>
+  <p class="r">Siz mening qarorimga qarshi chiqishingiz ham mumkin edi.</p>
+  <p class="r">Lekin siz meni qo‘llab-quvvatladingiz.</p>
+  <p class="r soft"><em>“O‘g‘lim o‘qisin.”</em></p>
+  <p class="r">Shu oddiy gapning ortida qancha mehnat borligini hozir tushunyapman.</p>
+  <p class="r">Dada, siz oilangiz va mening kelajagim uchun ishladingiz.</p>
+  <p class="r">Menga faqat pul emas, imkoniyat berdingiz.</p>
+  <p class="r">Menga o‘zim xohlagan yo‘lni tanlash imkonini berdingiz.</p>
+  <p class="r">Buning uchun sizdan minnatdorman.</p>
+</div></section>
+
+<section><div class="wrap">
+  <div class="line r"></div>
+  <h2 class="r">Men baxtli bolalikni boshdan kechirdim.</h2>
+  <p class="r">Bizning oilamizda juda og‘ir davrlar bo‘lmagan.</p>
+  <p class="r">Yaxshi sharoitda katta bo‘ldik.</p>
+  <p class="r">Men ko‘p narsalarni oddiy deb qabul qilib ulg‘aydim.</p>
+  <p class="r soft">Uyimiz bor edi.</p>
+  <p class="r soft">Oziq-ovqatimiz bor edi.</p>
+  <p class="r soft">O‘qishim uchun imkoniyat bor edi.</p>
+  <p class="r">Xohishlarimning ko‘pini amalga oshirishga harakat qilardingiz.</p>
+  <p class="r">Men esa bularning ortida nima borligini o‘sha paytda tushunmasdim.</p>
+  <p class="r">Endi tushunyapman.</p>
+  <p class="r">Bu shunchaki “sharoit” emas ekan.</p>
+  <p class="r" style="color:var(--gold);font-style:italic">Bu — sizlarning mehnatingiz ekan.</p>
+</div></section>
+
+<section><div class="wrap">
+  <h2 class="r">Sizlar menga ishondingiz.</h2>
+  <p class="r">Men hali yosh bo‘lishimga qaramay, mashina haydashimga ham qarshi bo‘lmagansizlar.</p>
+  <p class="r">Menga ishonch bildirdingiz.</p>
+  <p class="r">Bu ham men uchun juda katta narsa.</p>
+  <p class="r">Men esa kelajakda sizlarga bundan ham ko‘proq imkoniyat yaratishni xohlayman.</p>
+  <!-- RASM: shu yerga <img src="mashina.jpg" alt=""> qo'ying, matnni (placeholder) olib tashlang -->
+  <div class="photo r" id="carPhoto"><span>Mashina rasmi uchun joy</span></div>
+  <p class="r" style="margin-top:3rem">Dada va Ayam,</p>
+  <p class="r">bir kun kelib sizlarga eng so‘nggi rusumdagi mashinalarni olib berishni,</p>
+  <p class="r">sizlar xohlagan sharoitni yaratishni,</p>
+  <p class="r">sizlar uchun men hozir sizlar qilayotganingizdek qayg‘urishni xohlayman.</p>
+</div></section>
+
+<section class="dark"><div class="wrap">
+  <h2 class="r">Men hali ham yo‘lning boshidaman.</h2>
+  <p class="r">Men hali yoshman.</p>
+  <p class="r">Hali ko‘p narsani o‘rganishim kerak.</p>
+  <p class="r">Hali o‘zimni isbotlashim kerak.</p>
+  <p class="r">Lekin bitta narsani bilaman.</p>
+  <p class="r">Men sizlar xohlagandek farzand bo‘lishga harakat qilaman.</p>
+  <p class="r">Bir kun kelib:</p>
+  <p class="r soft"><em>“Mana, bizning o‘g‘limiz.”</em></p>
+  <p class="r">deb faxrlanib yurishingizni xohlayman.</p>
+  <p class="r">Sizlarning menga bergan ishonchingizni oqlashni xohlayman.</p>
+</div></section>
+
+<section id="final"><div class="wrap">
+  <h2 class="r">Dada. Ayam.</h2>
+  <p class="r">Men bularning hech birini sizlarga oldin aytmaganman.</p>
+  <p class="r">Balki ba’zan minnatdorchiligimni ko‘rsatmagandirman.</p>
+  <p class="r">Balki ba’zan sizlarning qilganlaringizni oddiy narsa deb qabul qilgandirman.</p>
+  <p class="r">Lekin ich-ichimdan men hammasini qadrlayman.</p>
+  <p class="r" style="margin-top:2.5rem">Sizlar meni yaxshi sharoitda katta qildingizlar.</p>
+  <p class="r">Kasal bo‘lganimda tunlaringizni bedor o‘tkazdingizlar.</p>
+  <p class="r">Mening sog‘lig‘imdan xavotir oldingizlar.</p>
+  <p class="r">Dada, oilangiz uchun ishladingiz.</p>
+  <p class="r">Mening o‘qishim uchun harakat qildingiz.</p>
+  <p class="r">Mening qarorlarimni qo‘llab-quvvatladingiz.</p>
+  <p class="r">Menga ishondingiz.</p>
+  <p class="r" style="margin-top:2.5rem">Men esa bir kun kelib sizlarning qilganlaringizni qaytarishni xohlayman.</p>
+  <p class="r">Sizlar xohlagan sharoitni yaratishni xohlayman.</p>
+  <p class="r">Sizlarga yaxshi mashinalar olib berishni xohlayman.</p>
+  <p class="r">Eng muhimi esa —</p>
+  <p class="r">sizlar mendek farzandingiz borligidan faxrlanib yurishingizni xohlayman.</p>
+  <p class="r">Men hali bunga erishganim yo‘q.</p>
+  <p class="r">Lekin harakat qilaman.</p>
+  <p class="r" style="margin-top:2.5rem">Va bir narsani hozir aytmoqchiman:</p>
+  <p class="name r">Dada, Kozimbek.<br>Ayam, Muhlisa.</p>
+  <p class="r">Men sizlarni chin dildan yaxshi ko‘raman.</p>
+  <p class="r" style="margin-top:2rem">Menga qilgan barcha yaxshiliklaringiz uchun rahmat.</p>
+  <p class="r">Menga bergan hayotingiz uchun rahmat.</p>
+  <p class="r">Menga ishonganingiz uchun rahmat.</p>
+  <p class="r" style="margin-top:2rem">Men sizlarning farzandingiz bo‘lganimdan faxrlanaman.</p>
+  <p class="sign r">— Komiljon</p>
+</div></section>
+
+<section><div class="wrap">
+  <h2 class="r" style="margin-bottom:3rem">Sizlar men uchun har doim uy bo‘lib qolasizlar.</h2>
+  <p class="soft r" style="font-size:1.1rem">Dada Kozimbek &amp; Ayam Muhlisa<br>Komiljondan.</p>
+  <button class="btn r" id="replay">Replay</button>
+</div></section>
+
+</main>
+
+<script>
+(function(){
+  var body=document.body, intro=document.getElementById('intro');
+  var audio=document.getElementById('bg'), mute=document.getElementById('mute'), playing=false;
+  function $(id){return document.getElementById(id)}
+  function later(el,ms){setTimeout(function(){el.classList.add('on')},ms)}
+  function runIntro(){
+    ['i1','i2','i3'].forEach(function(id){$(id).classList.remove('on')});
+    later($('i1'),600); later($('i2'),4200); later($('i3'),7200);
+  }
+  // Scroll reveal (slow, one by one)
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target);} });
+  },{threshold:.35,rootMargin:'0px 0px -8% 0px'});
+  function observe(){document.querySelectorAll('#story .r').forEach(function(el){el.classList.remove('on');io.observe(el)})}
+  // Light parallax
+  var tick=false;
+  window.addEventListener('scroll',function(){
+    if(tick)return; tick=true;
+    requestAnimationFrame(function(){document.documentElement.style.setProperty('--py',(window.scrollY*-0.06)+'px');tick=false});
+  },{passive:true});
+  // Optional music: fails silently if file missing
+  function startMusic(){
+    try{
+      audio.volume=0.35;
+      var p=audio.play();
+      audio.addEventListener('error',function(){},{once:true});
+      if(p&&p.then){p.then(function(){playing=true;mute.classList.add('has');mute.textContent='musiqa: yoqilgan'}).catch(function(){})}
+    }catch(e){}
+  }
+  mute.onclick=function(){
+    if(playing){audio.pause();playing=false;mute.textContent='musiqa: o‘chiq'}
+    else{audio.play().then(function(){playing=true;mute.textContent='musiqa: yoqilgan'}).catch(function(){})}
+  };
+  $('i3').onclick=function(){
+    startMusic();
+    body.classList.add('go');
+    observe();
+    intro.classList.add('gone');
+    setTimeout(function(){body.classList.remove('lock');intro.style.display='none'},2000);
+  };
+  $('replay').onclick=function(){
+    window.scrollTo({top:0,behavior:'smooth'});
+    setTimeout(function(){
+      body.classList.add('lock');body.classList.remove('go');
+      intro.style.display='';intro.classList.remove('gone');
+      audio.pause();playing=false;mute.classList.remove('has');
+      runIntro();
+    },1400);
+  };
+  runIntro();
+})();
+</script>
+</body>
+</html>
